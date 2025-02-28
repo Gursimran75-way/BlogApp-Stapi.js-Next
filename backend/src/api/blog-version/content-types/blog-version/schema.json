@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "blog_versions",
+  "info": {
+    "singularName": "blog-version",
+    "pluralName": "blog-versions",
+    "displayName": "BlogVersion",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "blog": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::blog.blog",
+      "inversedBy": "blog_versions"
+    },
+    "version": {
+      "type": "integer",
+      "min": 2,
+      "required": false
+    },
+    "content": {
+      "type": "richtext",
+      "required": true
+    },
+    "blogCreatedAt": {
+      "type": "datetime",
+      "required": false
+    }
+  }
+}

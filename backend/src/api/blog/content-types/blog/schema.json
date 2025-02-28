@@ -1,0 +1,71 @@
+{
+  "kind": "collectionType",
+  "collectionName": "blogs",
+  "info": {
+    "singularName": "blog",
+    "pluralName": "blogs",
+    "displayName": "Blog",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "content": {
+      "type": "richtext",
+      "required": true
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "blogs"
+    },
+    "blogStatus": {
+      "type": "enumeration",
+      "enum": [
+        "Draft",
+        "Pending",
+        "Approved",
+        "Rejected"
+      ],
+      "default": "Draft"
+    },
+    "version": {
+      "type": "integer",
+      "default": 1,
+      "min": 1
+    },
+    "blogCreatedAt": {
+      "type": "datetime",
+      "unique": false,
+      "required": false
+    },
+    "blog_versions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::blog-version.blog-version",
+      "mappedBy": "blog"
+    },
+    "comments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::comment.comment",
+      "mappedBy": "blog"
+    },
+    "likes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::like.like",
+      "mappedBy": "blog"
+    }
+  }
+}
